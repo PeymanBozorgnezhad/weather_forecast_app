@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/weather.dart';
 import 'package:weather_app/services/data_service.dart';
+import '../constants.dart';
 import '../widgets/bottom_view.dart';
 import '../widgets/mid_view.dart';
 
@@ -16,6 +17,7 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
   String _cityName = "Tehran";
   final _cityTextController = TextEditingController();
   final _dataService = DataService();
+  String weatherIconUrl = 'http://openweathermap.org/img/wn/';
 
   @override
   void initState() {
@@ -89,17 +91,49 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
       child: Container(
         child: TextField(
           controller: _cityTextController,
-          decoration: InputDecoration(
+          decoration:
+          InputDecoration(
+            enabledBorder:  OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30.0),
+              ),
+              borderSide: BorderSide(
+                color: kColorInputDecoration,
+              ),
+            ),
+            focusedBorder:  OutlineInputBorder(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30.0),
+              ),
+              borderSide: BorderSide(
+                color: kColorInputDecoration,
+              ),
+            ),
+            border:  OutlineInputBorder(
+              borderSide: BorderSide(
+                color: kColorInputDecoration,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30.0),
+              ),
+            ),
             hintText: "Enter City Name",
+            hintStyle: const TextStyle(
+              color: Colors.grey,
+            ),
+            filled: true,
+            fillColor: Colors.white,
             prefixIcon: IconButton(
               onPressed: search,
-              icon: const Icon(Icons.search),
+              icon: Icon(
+                Icons.search,
+                color: kColorInputDecoration,
+              ),
             ),
             suffixIcon: IconButton(
               icon: const Icon(Icons.clear),
               onPressed: () => _cityTextController.clear(),
             ),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             contentPadding: const EdgeInsets.all(10),
           ),
           onSubmitted: (value) {
@@ -123,4 +157,6 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
     });
     return forecastObject;
   }
+
+
 }
